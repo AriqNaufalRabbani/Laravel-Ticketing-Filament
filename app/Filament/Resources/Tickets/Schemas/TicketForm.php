@@ -7,6 +7,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Select;
 use Filament\Schemas\Components\Grid;
+use Filament\Forms\Components\FileUpload;
 use Filament\Schemas\Schema;
 use App\Models\Category;
 use App\Models\Priority;
@@ -81,6 +82,15 @@ class TicketForm
                         ->default('open')
                         ->required()
                         ->columnSpan(1),
+
+                    FileUpload::make('attachments')
+                        ->label('File Attachments')
+                        ->multiple()                 // Upload banyak file
+                        ->directory('ticket-files')  // Folder penyimpanan
+                        ->preserveFilenames()
+                        ->maxSize(5120)              // 5MB per file
+                        ->acceptedFileTypes(['image/*', 'application/pdf', 'application/zip', 'application/x-rar-compressed'])
+                        ->columnSpanFull(),
                 ]),
             ]);
     }

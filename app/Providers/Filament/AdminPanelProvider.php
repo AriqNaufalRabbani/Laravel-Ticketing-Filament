@@ -37,9 +37,17 @@ class AdminPanelProvider extends PanelProvider
                 Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
+            // ->widgets([
+            //     AccountWidget::class,
+            //     FilamentInfoWidget::class,
+            // ])
             ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
+                \App\Filament\Widgets\TicketStatsOverview::class,
+                \App\Filament\Widgets\TicketStatusChart::class,
+                \App\Filament\Widgets\TicketPriorityChart::class,
+                \App\Filament\Widgets\TicketCategoryChart::class,
+                \App\Filament\Widgets\TicketMonthlyTrendChart::class,
+                \App\Filament\Widgets\TicketAgentPerformanceChart::class,
             ])
             ->middleware([
                 EncryptCookies::class,

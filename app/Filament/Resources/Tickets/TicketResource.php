@@ -13,6 +13,8 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use App\Filament\Resources\Tickets\Widgets\TicketLogWidget;
+use App\Filament\Resources\Tickets\RelationManagers\CommentsRelationManager;
 
 class TicketResource extends Resource
 {
@@ -35,7 +37,7 @@ class TicketResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            CommentsRelationManager::class,
         ];
     }
 
@@ -45,6 +47,13 @@ class TicketResource extends Resource
             'index' => ListTickets::route('/'),
             'create' => CreateTicket::route('/create'),
             'edit' => EditTicket::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            TicketLogWidget::class,
         ];
     }
 }
